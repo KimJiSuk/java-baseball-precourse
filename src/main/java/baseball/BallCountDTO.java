@@ -1,21 +1,32 @@
 package baseball;
 
 public class BallCountDTO {
-    int strike;
-    int ball;
-    boolean strikeout = false;
-    boolean nothing = false;
+    private final int strike;
+    private final int ball;
+    private final boolean strikeout;
+    private final boolean nothing;
 
-    public BallCountDTO(int strike, int ball) {
+    public BallCountDTO(int strike, int ball, boolean strikeout, boolean nothing) {
         this.strike = strike;
         this.ball = ball;
-
-        if (strike == 0 && ball == 0) {
-            nothing = true;
-        }
-
-        if (strike == Constants.NUMBER_OF_NUMBERS) {
-            strikeout = true;
-        }
+        this.strikeout = strikeout;
+        this.nothing = nothing;
     }
+
+    public int getStrike() {
+        return strike;
+    }
+
+    public int getBall() {
+        return ball;
+    }
+
+    public boolean isStrikeout() {
+        return strikeout;
+    }
+
+    public boolean isNothing() {
+        return nothing;
+    }
+
 }

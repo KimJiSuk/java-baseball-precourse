@@ -33,12 +33,12 @@ class GameTest {
         /* 3스트라이크 */
         List<Integer> temp = new ArrayList<>(game.getBaseballNumbers());
         assertThat(game.confirmBaseballNumbers(temp)).usingRecursiveComparison()
-                .isEqualTo(new BallCountDTO(Constants.NUMBER_OF_NUMBERS, 0));
+                .isEqualTo(new BallCountDTO(Constants.NUMBER_OF_NUMBERS, 0, true, false));
 
         /* 1스트라이크 2볼, swap */
         Collections.swap(temp, 0, 1);
         assertThat(game.confirmBaseballNumbers(temp)).usingRecursiveComparison()
-                .isEqualTo(new BallCountDTO(1, Constants.NUMBER_OF_NUMBERS - 1));
+                .isEqualTo(new BallCountDTO(1, Constants.NUMBER_OF_NUMBERS - 1, false, false));
 
         /* 3볼 */
         temp = new ArrayList<>(game.getBaseballNumbers());
@@ -49,25 +49,25 @@ class GameTest {
         }
 
         assertThat(game.confirmBaseballNumbers(temp)).usingRecursiveComparison()
-                .isEqualTo(new BallCountDTO(0, Constants.NUMBER_OF_NUMBERS));
+                .isEqualTo(new BallCountDTO(0, Constants.NUMBER_OF_NUMBERS, false, false));
 
         /* 2스트라이크 */
         temp = new ArrayList<>(game.getBaseballNumbers());
         temp.set(0, 0);
         assertThat(game.confirmBaseballNumbers(temp)).usingRecursiveComparison()
-                .isEqualTo(new BallCountDTO(Constants.NUMBER_OF_NUMBERS - 1, 0));
+                .isEqualTo(new BallCountDTO(Constants.NUMBER_OF_NUMBERS - 1, 0, false, false));
 
         /* 1스트라이크 */
         temp.set(1, 0);
         assertThat(game.confirmBaseballNumbers(temp)).usingRecursiveComparison()
-                .isEqualTo(new BallCountDTO(Constants.NUMBER_OF_NUMBERS - 2, 0));
+                .isEqualTo(new BallCountDTO(Constants.NUMBER_OF_NUMBERS - 2, 0, false, false));
 
         /* 낫싱 */
         for (int i = 2; i < Constants.NUMBER_OF_NUMBERS; i++) {
             temp.set(i, 0);
         }
         assertThat(game.confirmBaseballNumbers(temp)).usingRecursiveComparison()
-                .isEqualTo(new BallCountDTO(0, 0));
+                .isEqualTo(new BallCountDTO(0, 0, false, true));
 
     }
 

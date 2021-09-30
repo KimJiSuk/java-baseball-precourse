@@ -29,8 +29,10 @@ public class Game {
     public BallCountDTO confirmBaseballNumbers(List<Integer> inputNumbers) {
         int strike = getStrike(inputNumbers);
         int ball = getBall(inputNumbers, strike);
+        boolean strikeout = (strike == Constants.NUMBER_OF_NUMBERS);
+        boolean nothing = (strike == 0 && ball == 0);
 
-        return new BallCountDTO(strike, ball);
+        return new BallCountDTO(strike, ball, strikeout, nothing);
     }
 
     private int getStrike(List<Integer> inputNumbers) {
