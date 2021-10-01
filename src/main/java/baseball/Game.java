@@ -3,23 +3,27 @@ package baseball;
 import nextstep.utils.Randoms;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 
 public class Game {
-    private final List<Integer> baseballNumbers;
+    private final List<Integer> baseballNumbers = new ArrayList<>();
 
     public Game() {
-        Set<Integer> setNumbers = new HashSet<>();
-
-        while (setNumbers.size() < Constants.NUMBER_OF_NUMBERS) {
-            setNumbers.add(Randoms.pickNumberInRange(Constants.LOW_NUMBER, Constants.HIGH_NUMBER));
+        while (baseballNumbers.size() < 3) {
+            addNumber(generateNumber());
         }
+    }
 
-        baseballNumbers = new ArrayList<>(setNumbers);
+    private int generateNumber() {
+        return Randoms.pickNumberInRange(Constants.LOW_NUMBER, Constants.HIGH_NUMBER);
+    }
+
+    private void addNumber(int number) {
+        if (!baseballNumbers.contains(number)) {
+            baseballNumbers.add(number);
+        }
     }
 
     public List<Integer> getBaseballNumbers() {

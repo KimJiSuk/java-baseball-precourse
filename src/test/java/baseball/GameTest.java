@@ -11,18 +11,20 @@ import static org.assertj.core.api.Assertions.*;
 class GameTest {
     @Test
     public void generateBaseballNumber() {
-        Game game = new Game();
+        for (int i = 0; i < 10000; i++) {
+            Game game = new Game();
 
-        assertThat(game.getBaseballNumbers())
-                .isNotNull()
-                .hasSize(Constants.NUMBER_OF_NUMBERS);
-
-        for (Integer number : game.getBaseballNumbers()) {
-            assertThat(number)
-                    .isGreaterThanOrEqualTo(Constants.LOW_NUMBER)
-                    .isLessThanOrEqualTo(Constants.HIGH_NUMBER);
             assertThat(game.getBaseballNumbers())
-                    .containsOnlyOnce(number);
+                    .isNotNull()
+                    .hasSize(Constants.NUMBER_OF_NUMBERS);
+
+            for (Integer number : game.getBaseballNumbers()) {
+                assertThat(number)
+                        .isGreaterThanOrEqualTo(Constants.LOW_NUMBER)
+                        .isLessThanOrEqualTo(Constants.HIGH_NUMBER);
+                assertThat(game.getBaseballNumbers())
+                        .containsOnlyOnce(number);
+            }
         }
     }
 
