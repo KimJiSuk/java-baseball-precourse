@@ -24,10 +24,9 @@ public class GameView {
 
     public void printGameOverMessage() {
         System.out.println(Constants.GAME_OVER_MESSAGE);
-        printNewGameMessage();
     }
 
-    private void printNewGameMessage() {
+    public void printNewGameMessage() {
         System.out.println(Constants.NEW_GAME_MESSAGE);
     }
 

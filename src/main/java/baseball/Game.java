@@ -11,7 +11,7 @@ public class Game {
     private final List<Integer> baseballNumbers = new ArrayList<>();
 
     public Game() {
-        while (baseballNumbers.size() < 3) {
+        while (baseballNumbers.size() < Constants.NUMBER_OF_NUMBERS) {
             addNumber(generateNumber());
         }
     }
