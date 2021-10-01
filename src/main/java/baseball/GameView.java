@@ -22,6 +22,14 @@ public class GameView {
         System.out.println();
     }
 
+    public void printRestartInputError() {
+        System.out.println(Constants.RESTART_ERROR_MESSAGE);
+    }
+
+    public void printInputError() {
+        System.out.println(Constants.INPUT_ERROR_MESSAGE);
+    }
+
     public void printGameOverMessage() {
         System.out.println(Constants.GAME_OVER_MESSAGE);
     }

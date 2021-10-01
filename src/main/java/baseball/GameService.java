@@ -3,6 +3,7 @@ package baseball;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Arrays;
 import java.util.Set;
 
 public class GameService {
@@ -16,17 +17,11 @@ public class GameService {
     }
 
     public void startGame() {
-        do {
-            gameView.printEnterNumber();
+        while (!ballCountDTO.isStrikeout()) {
             List<Integer> inputNumbers = readInputNumber();
-
-            if (!checkInputNumber(inputNumbers)) {
-                continue;
-            }
-
             ballCountDTO = game.confirmBaseballNumbers(inputNumbers);
             gameView.printBallCount(ballCountDTO);
-        } while (!ballCountDTO.isStrikeout());
+        }
 
         gameView.printGameOverMessage();
     }
@@ -35,18 +30,37 @@ public class GameService {
         gameView.printNewGameMessage();
         String input = gameView.readLine();
 
-        return input.equals("1");
+        if (Arrays.asList(Constants.START_COMMAND, Constants.STOP_COMMAND).contains(input)) {
+            return input.equals(Constants.START_COMMAND);
+        }
+
+        gameView.printRestartInputError();
+        return isRestartGame();
     }
 
     private List<Integer> readInputNumber() {
+        gameView.printEnterNumber();
         String input = gameView.readLine();
-        return convertInputToList(input);
+
+        if (checkInputNumber(input)) {
+            return convertInputToList(input);
+        }
+
+        gameView.printInputError();
+        return readInputNumber();
     }
 
-    private boolean checkInputNumber(List<Integer> inputNumbers) {
-        Set<Integer> setInputNumbers = new HashSet<>(inputNumbers);
+    private boolean checkInputNumber(String input) {
+        if (!input.chars().allMatch(Character::isDigit)) {
+            return false;
+        }
 
-        return inputNumbers.size() == Constants.NUMBER_OF_NUMBERS && setInputNumbers.size() == inputNumbers.size();
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < input.length(); i++) {
+            set.add(Character.getNumericValue(input.charAt(i)));
+        }
+
+        return input.length() == Constants.NUMBER_OF_NUMBERS && set.size() == input.length();
     }
 
     private List<Integer> convertInputToList(String input) {
