@@ -13,8 +13,14 @@
 * View 작성
   * 숫자 입력 받기
   * 결과 출력
-  * 새게임 or 종료 입력 받기
-* Controller 작성 및 DTO 작성
-  * View - Controller 
-  * Controller - Model 
+  * 새게임 and 종료 입력 받기
+* BallCount DTO 작성
+  * 볼 카운트 DTO
+  * Controller - Model
+* Controller 작성 및 Service 작성
+  * 게임 종료 & 게임 재시작 
+  * 잘못된 입력 Check 로직 추가
 * 기타 Refactoring
+  * indent depth 1이하 유지
+  * else 사용하지 않기
+  * 모든 케이스 테스트 추가
