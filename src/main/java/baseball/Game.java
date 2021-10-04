@@ -4,7 +4,6 @@ import nextstep.utils.Randoms;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 
 public class Game {
@@ -31,32 +30,48 @@ public class Game {
     }
 
     public BallCountDTO confirmBaseballNumbers(List<Integer> inputNumbers) {
-        int strike = getStrike(inputNumbers);
-        int ball = getBall(inputNumbers, strike);
+        int strike = getStrikes(inputNumbers);
+        int ball = getBalls(inputNumbers, strike);
         boolean strikeout = (strike == Constants.NUMBER_OF_NUMBERS);
         boolean nothing = (strike == 0 && ball == 0);
 
         return new BallCountDTO(strike, ball, strikeout, nothing);
     }
 
-    private int getStrike(List<Integer> inputNumbers) {
+    private int getStrikes(List<Integer> inputNumbers) {
         int count = 0;
 
         for (int i = 0; i < inputNumbers.size(); i++) {
-            count += (Objects.equals(inputNumbers.get(i), baseballNumbers.get(i))) ? 1 : 0;
+            count += getStrike(baseballNumbers.get(i), inputNumbers.get(i));
         }
 
         return count;
     }
 
-    private int getBall(List<Integer> inputNumbers, int strikeCount) {
+    private int getStrike(int gameNumber, int inputNumber) {
+        if (gameNumber == inputNumber) {
+            return 1;
+        }
+
+        return 0;
+    }
+
+    private int getBalls(List<Integer> inputNumbers, int strikeCount) {
         int count = 0;
 
         for (Integer inputNumber : inputNumbers) {
-            count += (baseballNumbers.contains(inputNumber)) ? 1 : 0;
+            count += getBall(inputNumber);
         }
 
         return count - strikeCount;
+    }
+
+    private int getBall(int inputNumber) {
+        if (baseballNumbers.contains(inputNumber)) {
+            return 1;
+        }
+
+        return 0;
     }
 
 }
